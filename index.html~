@@ -60,7 +60,7 @@ A video of this method can be found <a href="https://www.youtube.com/watch?v=Yuj
 <h2>
 <a name="object-tracking-with-shape-matching" class="anchor" href="#object-tracking-with-shape-matching"><span class="octicon octicon-link"></span></a>Object tracking with shape matching</h2>
 
-<p>I thought it might be more reliable to find the center of a pattern rather than a solid color and so after a few iterations on the marker I ended up with this.\</p>
+<p>I thought it might be more reliable to find the center of a pattern rather than a solid color and so after a few iterations on the marker I ended up with this.</p>
 
 <img src="images/robot_marker.jpg" alt="robot marker">
 
@@ -75,9 +75,7 @@ A video of this method can be found <a href="https://www.youtube.com/watch?v=Yuj
 
 <p>My next thought was to try to use opencv’s corner detection methods to adjust the points I have from the contour centroids and hopefully place them on the center intersection of my checkerboard marker.  I was unable to adjust the corner detection methods in opencv to reliably find those intersections though.</p>
 
-<blockquote>
-<p>Corner image goes here</p>
-</blockquote>
+<img src="images/corners.png" alt="corner image">
 
 <p>The blue dots are the centroids of our checkerboard contours and the red corners are corners detected with opencv’s goodFeaturesToTrack.  I also tried using cornerSubPix to the positions of the contour centroids but it yielded very similar results.</p>
       </section>
