@@ -35,11 +35,13 @@
 <ol>
 <li>I understood the ceiling camera option more fully.</li>
 <li>The space I had to use had low hanging lights that could obstruct the view of the markers from below.</li>
-</ol><p>I originally imagined the flow of the program as thus:
-1. Recognize the robot with the ceiling camera and extract position and orientation from image
-2. Use image_geometry to turn that pixel in image space into a 3d vector facing the robot in camera space
-3. Use depth image data to find how far our vector must travel to reach the robot
-4. Publish that point and orientation as a frame in tf that is the parent of base_footprint</p>
+</ol><p>I originally imagined the flow of the program as thus:</p>
+<ol>
+<li>Recognize the robot with the ceiling camera and extract position and orientation from image</li>
+<li>Use image_geometry to turn that pixel in image space into a 3d vector facing the robot in camera space</li>
+<li>Use depth image data to find how far our vector must travel to reach the robot</li>
+<li>Publish that point and orientation as a frame in tf that is the parent of base_footprint</li>
+</ol>
 
 <p>That is about it, all we need in addition to that is to publish our ceiling camera frames as a child of our world frame and made sure base_footprint has no other parents.  To accomplish those I chose to use a static_frame_publisher node and to modify the turtlebot bringup to not publish the odom frame, the normal parent of base_footprint. The final tf tree should look something like this.</p>
 
