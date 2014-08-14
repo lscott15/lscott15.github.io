@@ -43,7 +43,9 @@
 
 <p>That is about it, all we need in addition to that is to publish our ceiling camera frames as a child of our world frame and made sure base_footprint has no other parents.  To accomplish those I chose to use a static_frame_publisher node and to modify the turtlebot bringup to not publish the odom frame, the normal parent of base_footprint. The final tf tree should look something like this.</p>
 
-<img src="https://github.com/lscott15/lscott15.github.io/blob/master/images/ceiling%20localizer%20tf.png" alt="tf tree">
+<blockquote>
+<p>TF diagram goes here</p>
+</blockquote>
 
 <p>To simplify my first pass I ended up removing the use of depth data and instead getting my point in camera space from the 3d vector and the fact that I already know the z coordinate as long as the ceiling camera is perfectly perpendicular to the floor.</p>
 
