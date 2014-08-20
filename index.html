@@ -57,7 +57,11 @@
 <a name="object-tracking-through-color-blobs" class="anchor" href="#object-tracking-through-color-blobs"><span class="octicon octicon-link"></span></a>Object tracking through color blobs</h2>
 
 <p>My first pass at recognizing and tracking the robot with the ceiling camera was based off this tutorial that takes a given color (red for example) and separates that color channel into a binary image.  Then it finds the largest closed shape in that image and tracks it.  This was done for two colored pieces of tape on the robot, one in back and one in front.  To get position in 3d space I found the midpoint of the centroids of those two shapes and used the projected vector to get position like in the above diagram.  Orientation was calculated using the angle between the line going through our two tape centroids points and the origin.  Finally, this position and orientation is published to a tf frame whose parent is the optical frame of the ceiling camera.  A static_frame_publisher can then connect our base ceiling camera frame to the map and the tf frame we published to the base of the robot.
-A video of this method can be found <a href="https://www.youtube.com/watch?v=YujTeesezbw">here</a>.  As you can see, the centroids of our colored pieces of tape move quite a bit, leading to a very unreliable form of localization.  While this might be suitable for some applications we need a much more accurate and reliable implementation.  While the implementation above is quite simple, I did experiment with using opencv to approximate a more regular shape from the color blobs but the variation from frame to frame remained.</p>
+A video of this method can be found below.</p>
+<iframe width="420" height="315" src="//www.youtube.com/embed/YujTeesezbw" frameborder="0" allowfullscreen></iframe>
+
+<p>As you can see, the centroids of our colored pieces of tape move quite a bit, leading to a very unreliable form of localization.  While this might be suitable for some applications we need a much more accurate and reliable implementation.  While the implementation above is quite simple, I did experiment with using opencv to approximate a more regular shape from the color blobs but the variation from frame to frame remained.</p>
+
 
 <h2>
 <a name="object-tracking-with-shape-matching" class="anchor" href="#object-tracking-with-shape-matching"><span class="octicon octicon-link"></span></a>Object tracking with shape matching</h2>
@@ -71,7 +75,8 @@ A video of this method can be found <a href="https://www.youtube.com/watch?v=Yuj
 <img src="images/thresh.png" alt="thresholded image">
 <img src="images/pattern.png" alt="checkerboard pattern">
 
-<p>Finding the centroids of the checkerboard shapes proved to be more accurate from frame to frame and yielded a more satisfactory result.  You can find a video <a href="https://www.youtube.com/watch?v=opjV2vWPePo">here</a>.</p>
+<p>Finding the centroids of the checkerboard shapes proved to be more accurate from frame to frame and yielded a more satisfactory result.  You can find a video below.</p>
+<iframe width="420" height="315" src="//www.youtube.com/embed/opjV2vWPePo" frameborder="0" allowfullscreen></iframe>
 
 <p>While this method is slightly more accurate and much more robust because of the shape matching it still leaves something wanting.  I looked into averaging the centroids of my markers from frame to frame to hopefully remove the jitter that affects the orientation of the robot so much but it offered little improvement when averaging a small number of samples and with larger n the position and orientation lagged behind the robot while moving and rotating.</p>
 
