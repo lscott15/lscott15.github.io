@@ -12,11 +12,11 @@ I originally imagined the flow of the program as thus:
 
 That is about it, all we need in addition to that is to publish our ceiling camera frames as a child of our world frame and made sure base_footprint has no other parents.  To accomplish those I chose to use a static_frame_publisher node and to modify the turtlebot bringup to not publish the odom frame, the normal parent of base_footprint. The final tf tree should look something like this.
 
-> TF diagram goes here
+![TF diagram](/images/tf_tree.png)
 
 To simplify my first pass I ended up removing the use of depth data and instead getting my point in camera space from the 3d vector and the fact that I already know the z coordinate as long as the ceiling camera is perfectly perpendicular to the floor.
 
-> Drawing goes here
+![Basic localizer approach](/images/localizer_drawing.png)
 
 This method should be equally accurate and reduced development time and processing load slightly by not requiring use of the depth sensor in the kinect.
 
@@ -29,11 +29,12 @@ A video of this method can be found [here](https://www.youtube.com/watch?v=YujTe
 
 I thought it might be more reliable to find the center of a pattern rather than a solid color and so after a few iterations on the marker I ended up with this.\
 
-> Marker image goes here
+![Robot marker](/images/robot_marker.jpb)
 
 My plan was to detect the center of the checkerboard markers and then detect front from the colors.  I thresholded a grayscale version of my image to try to select just the white parts of my checkerboard.  The thresholded image is pictures on the left.  From this I found the closed contours in the image and discarded those two small to be my markers.  Finally I sorted the contours based on how well they matched a pattern I drew in gimp (pictured to the right).
 
-> Thresh image and pattern image go here
+![Closed contours](/images/thresh.png)
+![Matching pattern](/images/pattern.png)
 
 Finding the centroids of the checkerboard shapes proved to be more accurate from frame to frame and yielded a more satisfactory result.  You can find a video [here](https://www.youtube.com/watch?v=opjV2vWPePo).
 
@@ -41,7 +42,7 @@ While this method is slightly more accurate and much more robust because of the 
 
 My next thought was to try to use opencv’s corner detection methods to adjust the points I have from the contour centroids and hopefully place them on the center intersection of my checkerboard marker.  I was unable to adjust the corner detection methods in opencv to reliably find those intersections though.
 
-> Corner image goes here
+![Prototype corner approach](/images/corners.png)
 
 The blue dots are the centroids of our checkerboard contours and the red corners are corners detected with opencv’s goodFeaturesToTrack.  I also tried using cornerSubPix to the positions of the contour centroids but it yielded very similar results.
 
