@@ -29,7 +29,7 @@ A video of this method can be found [here](https://www.youtube.com/watch?v=YujTe
 
 I thought it might be more reliable to find the center of a pattern rather than a solid color and so after a few iterations on the marker I ended up with this.\
 
-![Robot marker](/images/robot_marker.jpb)
+![Robot marker](/images/robot_marker.jpg)
 
 My plan was to detect the center of the checkerboard markers and then detect front from the colors.  I thresholded a grayscale version of my image to try to select just the white parts of my checkerboard.  The thresholded image is pictures on the left.  From this I found the closed contours in the image and discarded those two small to be my markers.  Finally I sorted the contours based on how well they matched a pattern I drew in gimp (pictured to the right).
 
